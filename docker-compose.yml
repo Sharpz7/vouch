@@ -1,0 +1,20 @@
+version: "3.7"
+
+services:
+  vouch:
+    hostname: vouch
+    image: sharp6292/vouch
+    environment:
+      OAUTH_PROVIDER: google
+      OAUTH_CALLBACK_URLS: ${CALLBACK_URL}
+      VOUCH_WHITELIST: ${ADMIN_EMAIL}
+      OAUTH_CLIENT_ID: ${VOUCHID}
+      OAUTH_CLIENT_SECRET: ${VOUCHSECRET}
+      VOUCH_DOMAINS: ${DOMAIN}
+
+    restart: always
+
+networks:
+    default:
+        external:
+            name: sharpnet
