@@ -1,55 +1,16 @@
 version: 2.1
 
+orbs:
+  docker: sharptools/docker@0.0.1
+  sharpcd: sharptools/sharpcd@0.0.1
+
 jobs:
-  build:
-    docker:
-      - image: docker:stable
-
-    steps:
-      - checkout
-
-      - setup_remote_docker
-
-      - run:
-          name: "Build"
-          command: |
-            start=`date +%s`
-
-            docker login -u $DOCKER_USER -p $DOCKER_PASS
-            docker pull sharp6292/vouch:latest || true
-            docker build --cache-from sharp6292/vouch:latest -t sharp6292/vouch:latest .
-            docker push sharp6292/vouch:latest
-
-            end=`date +%s`
-
-            runtime=$((end-start))
-            result=$(( runtime > 0 ))
-
-            if [[ $result -eq 1 ]] ; then
-                echo "Sleeping for remaining cache time..."
-                left=$((300-runtime))
-                sleep $left
-            else
-                echo "No need to sleep. More than 5 mins has past."
-            fi
-
-
-
   deploy:
     docker:
       - image: cimg/base:2020.01
 
     steps:
-      - checkout
-
-      - run:
-          name: "Install SharpCD"
-          command: |
-            wget https://github.com/Sharpz7/sharpcd/releases/download/0.1.0/linux.tar.gz
-            sudo tar -C /usr/local/bin/ -zxvf linux.tar.gz
-            rm -r linux.tar.gz
-
-            chmod u+x /usr/local/bin/sharpcd
+      - sharpcd/install:
 
       - run:
           name: "Setup Env"
@@ -60,17 +21,15 @@ jobs:
             echo "ADMIN_EMAIL=${ADMIN_EMAIL}" >> .env
             echo "CALLBACK_URL=${CALLBACK_URL}" >> .env
 
-      - run:
-          name: "SharpCD Deploy"
-          command: |
-            sharpcd --secret ${SHARPCD_SECRET}
+      - sharpcd/deploy:
 
 workflows:
   version: 2
   workflow:
     jobs:
-      - build:
+      - docker/build:
           context: General
+          image: sharp6292/vouch:latest
 
 
       - deploy:
