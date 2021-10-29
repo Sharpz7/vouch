@@ -23,11 +23,12 @@ jobs:
             end=`date +%s`
 
             runtime=$((end-start))
-            result=$(( runtime > 0  ))
+            result=$(( runtime > 0 ))
 
             if [[ $result -eq 1 ]] ; then
                 echo "Sleeping for remaining cache time..."
-                sleep (300-runtime)
+                left=$((300-runtime))
+                sleep $left
             else
                 echo "No need to sleep. More than 5 mins has past."
             fi
