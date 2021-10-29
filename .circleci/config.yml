@@ -23,7 +23,16 @@ jobs:
             end=`date +%s`
 
             runtime=$((end-start))
-            sleep (300-runtime)
+            result=$(( runtime > 0  ))
+
+            if [[ $result -eq 1 ]] ; then
+                echo "Sleeping for remaining cache time..."
+                sleep (300-runtime)
+            else
+                echo "No need to sleep. More than 5 mins has past."
+            fi
+
+
 
   deploy:
     docker:
