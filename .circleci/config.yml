@@ -10,7 +10,7 @@ jobs:
       - image: cimg/base:2020.01
 
     steps:
-      - sharpcd/install:
+      - sharpcd/install
 
       - run:
           name: "Setup Env"
@@ -21,7 +21,7 @@ jobs:
             echo "ADMIN_EMAIL=${ADMIN_EMAIL}" >> .env
             echo "CALLBACK_URL=${CALLBACK_URL}" >> .env
 
-      - sharpcd/deploy:
+      - sharpcd/deploy
 
 workflows:
   version: 2
@@ -35,7 +35,7 @@ workflows:
       - deploy:
           context: General
           requires:
-            - build
+            - docker/build
 
           filters:
             branches:
