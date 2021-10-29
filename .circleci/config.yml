@@ -13,10 +13,17 @@ jobs:
       - run:
           name: "Build"
           command: |
+            start=`date +%s`
+
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker pull sharp6292/vouch:latest || true
             docker build --cache-from sharp6292/vouch:latest -t sharp6292/vouch:latest .
             docker push sharp6292/vouch:latest
+
+            end=`date +%s`
+
+            runtime=$((end-start))
+            sleep (300-runtime)
 
   deploy:
     docker:
