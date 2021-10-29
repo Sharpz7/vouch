@@ -1,8 +1,8 @@
 version: 2.1
 
 orbs:
-  docker: sharptools/docker@0.0.1
-  sharpcd: sharptools/sharpcd@0.0.1
+  docker: sharptools/docker@volatile
+  sharpcd: sharptools/sharpcd@volatile
 
 jobs:
   deploy:
