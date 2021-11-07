@@ -6,11 +6,11 @@ services:
     image: sharp6292/vouch
     environment:
       OAUTH_PROVIDER: google
-      OAUTH_CALLBACK_URLS: ${CALLBACK_URL}
-      VOUCH_WHITELIST: ${ADMIN_EMAIL}
-      OAUTH_CLIENT_ID: ${VOUCHID}
-      OAUTH_CLIENT_SECRET: ${VOUCHSECRET}
-      VOUCH_DOMAINS: ${DOMAIN}
+      OAUTH_CALLBACK_URLS: ${CALLBACK_URL:?err}
+      VOUCH_WHITELIST: ${ADMIN_EMAIL:?err}
+      OAUTH_CLIENT_ID: ${VOUCHID:?err}
+      OAUTH_CLIENT_SECRET: ${VOUCHSECRET:?err}
+      VOUCH_DOMAINS: ${DOMAIN:?err}
 
     restart: always
 
