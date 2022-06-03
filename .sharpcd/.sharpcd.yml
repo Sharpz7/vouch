@@ -1,0 +1,20 @@
+version: 1.1
+
+tasks:
+  vouch_task:
+    name: Vouch Server
+    envfile: .env
+    type: docker
+    sharpurl: https://mcaq.me:5666
+    giturl: https://raw.githubusercontent.com/Sharpz7/
+    compose: /vouch/main/docker-compose.yml
+    depends:
+      - sharpnet
+
+  sharpnet:
+    name: SharpNet
+    type: docker
+    envfile: .env
+    sharpurl: https://mcaq.me:5666
+    giturl: https://raw.githubusercontent.com/Sharpz7/
+    compose: /sharpnet/master/docker-compose.yml

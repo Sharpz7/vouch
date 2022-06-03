@@ -59,22 +59,9 @@ server {
 
 # Installation
 
-- Make sure [SharpCD](https://github.com/Sharpz7/sharpcd) and [SharpNet](https://github.com/Sharpz7/sharpnet) have been installed.
+- Make sure [SharpCD](https://github.com/Sharpz7/sharpcd) has been installed.
 
 - Create a sharpcd.yml file like the following:
-
-```yml
-version: 1
-
-tasks:
-  vouch_task:
-    name: Vouch Server
-    envfile: .env
-    type: docker
-    sharpurl: https://mydomain.com:5666
-    giturl: https://raw.githubusercontent.com/Sharpz7/
-    compose: /vouch/main/docker-compose.yml
-```
 
 - Ensure the enviromental variables have been set in an enviromental variable file:
 
@@ -85,18 +72,42 @@ OAUTH_CALLBACK_URLS=${CALLBACK_URL}
 OAUTH_CLIENT_ID=${VOUCHID}
 OAUTH_CLIENT_SECRET=${VOUCHSECRET}
 
-VOUCH_WHITELIST=mygmail@gmail.com
-VOUCH_DOMAINS=mydomain.com
+ADMIN_EMAIL=mygmail@gmail.com
+# domain vouch proxy will be hosted on
+DOMAINS=mydomain.com
+
+#=============================
+
+# sharpnet ports
+HTTP_PORT=80
+HTTPS_PORT=443
+
+# Sharpnet gmail login credentials
+# for sending errors
+MAILPASS=email_password
+SENDER_EMAIL=email
+
+# Email that problems will be sent to
+RECEIVER_EMAIL=email@domain1.com
+
+# Domain for certificates
+DOMAIN=domain2.com
+
+# For Devs only
+DEV=FALSE
+NETWORK=sharpnet
 ```
 
-- Run `sharpcd` to get started!
+**(See the [sharpnet](https://github.com/Sharpz7/sharpnet) documentation for more information)**
+
+- Run the following command to install vouch proxy:
+
+```bash
+sharpcd --remotefile https://raw.githubusercontent.com/Sharpz7/vouch/main/.sharpcd/sharpcd.yml
+```
 
 - For help with this step, see the [Google Vouch Setup Example](https://github.com/vouch/vouch-proxy/blob/master/config/config.yml_example_google)
 
 ## Maintainers
 
 - [Adam McArthur](https://adam.mcaq.me)
-
-## TODO
-
-- Remove sharpnet domain and replace to Env var
