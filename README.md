@@ -2,7 +2,7 @@
 
 # Vouch
 
-A [Vouch Proxy](https://github.com/vouch/vouch-proxy) setup designed to work with [SharpNet](https://github.com/Sharpz7/sharpnet) and [SharpCD](https://github.com/Sharpz7/sharpcd)
+A [Vouch Proxy](https://github.com/vouch/vouch-proxy) setup designed to work with [SharpNet](https://github.com/SharpSet/sharpnet) and [SharpCD](https://github.com/SharpSet/sharpcd)
 
 # Example Nginx Config (Using Sharpnet)
 
@@ -57,27 +57,15 @@ server {
 }
 ```
 
-# Installation
+# Install Dependencies
 
-- Make sure [SharpCD](https://github.com/Sharpz7/sharpcd) has been installed.
+- Make sure [SharpCD](https://github.com/SharpSet/sharpcd) has been installed.
 
 - Create a sharpcd.yml file like the following:
 
 - Ensure the enviromental variables have been set in an enviromental variable file:
 
 ```env
-OAUTH_PROVIDER=google
-# Set by google
-OAUTH_CALLBACK_URLS=${CALLBACK_URL}
-OAUTH_CLIENT_ID=${VOUCHID}
-OAUTH_CLIENT_SECRET=${VOUCHSECRET}
-
-ADMIN_EMAIL=mygmail@gmail.com
-# domain vouch proxy will be hosted on
-DOMAINS=mydomain.com
-
-#=============================
-
 # sharpnet ports
 HTTP_PORT=80
 HTTPS_PORT=443
@@ -99,6 +87,32 @@ NETWORK=sharpnet
 ```
 
 **(See the [sharpnet](https://github.com/Sharpz7/sharpnet) documentation for more information)**
+
+- Run the following command to install vouch proxy:
+
+```bash
+sharpcd --remotefile https://raw.githubusercontent.com/Sharpz7/vouch/main/.sharpcd/dependencies.yml
+```
+
+# Installation
+
+- Make sure [SharpCD](https://github.com/SharpSet/sharpcd) has been installed.
+
+- Create a sharpcd.yml file like the following:
+
+- Ensure the enviromental variables have been set in an enviromental variable file:
+
+```env
+OAUTH_PROVIDER=google
+# Set by google
+OAUTH_CALLBACK_URLS=${CALLBACK_URL}
+OAUTH_CLIENT_ID=${VOUCHID}
+OAUTH_CLIENT_SECRET=${VOUCHSECRET}
+
+ADMIN_EMAIL=mygmail@gmail.com
+# domain vouch proxy will be hosted on
+DOMAINS=mydomain.com
+```
 
 - Run the following command to install vouch proxy:
 
