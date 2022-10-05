@@ -11,6 +11,7 @@ services:
       OAUTH_CLIENT_ID: ${VOUCHID:?err}
       OAUTH_CLIENT_SECRET: ${VOUCHSECRET:?err}
       VOUCH_DOMAINS: ${DOMAIN:?err}
+      VOUCH_COOKIE_DOMAIN: ${DOMAIN:?err}
 
     restart: always
 
