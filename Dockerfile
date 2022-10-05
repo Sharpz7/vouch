@@ -11,6 +11,8 @@ COPY --from=builder /vouch-proxy /vouch-proxy
 COPY ./sharpnet/nginx.conf /sharpnet/nginx.conf
 COPY ./buildfiles/start.sh /start.sh
 
+RUN sudo chmod +x /start.sh
+
 EXPOSE 9090
 ENTRYPOINT ["/start.sh"]
 HEALTHCHECK --interval=1m --timeout=5s CMD [ "/vouch-proxy", "-healthcheck" ]
