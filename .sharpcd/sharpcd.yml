@@ -5,6 +5,5 @@ tasks:
     name: Vouch Server
     envfile: .env
     type: docker
-    sharpurl: https://mcaq.me:5666
     giturl: https://raw.githubusercontent.com/Sharpz7/
     compose: /vouch/main/docker-compose.yml
