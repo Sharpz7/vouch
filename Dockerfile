@@ -1,10 +1,10 @@
-FROM voucher/vouch-proxy:0.19.2 as builder
+FROM voucher/vouch-proxy:0.37.0 as builder
 
 FROM bash:latest
 
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 COPY --from=builder templates/ templates/
-COPY --from=builder .defaults.yml .defaults.yml 
+COPY --from=builder .defaults.yml .defaults.yml
 COPY --from=builder static /static
 COPY --from=builder /vouch-proxy /vouch-proxy
 
