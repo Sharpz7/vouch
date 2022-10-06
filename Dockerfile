@@ -1,4 +1,11 @@
-FROM quay.io/vouch/vouch-proxy:0.37
+FROM quay.io/vouch/vouch-proxy:0.37 as builder
+
+FROM bash:latest
+
+COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+COPY --from=builder /etc/passwd /etc/passwd
+COPY --from=builder /etc/group /etc/group
+COPY --from=builder /go/bin/vouch-proxy /vouch-proxy
 
 COPY ./sharpnet/nginx.conf /sharpnet/nginx.conf
 COPY ./buildfiles/start.sh /start.sh
