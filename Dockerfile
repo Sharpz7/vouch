@@ -1,4 +1,4 @@
-FROM voucher/vouch-proxy:0.37.0 as builder
+FROM quay.io/vouch/vouch-proxy:0.37 as builder
 
 FROM bash:latest
 
