@@ -1,4 +1,4 @@
-FROM quay.io/vouch/vouch-proxy:0.3
+FROM quay.io/vouch/vouch-proxy:0.37
 
 COPY ./sharpnet/nginx.conf /sharpnet/nginx.conf
 COPY ./buildfiles/start.sh /start.sh
